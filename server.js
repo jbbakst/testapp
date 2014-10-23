@@ -54,6 +54,10 @@ app.delete('/api/todos/:todo_id', function(req, res) {
     });
 });
 
+app.get('/', function(req, res) {
+    res.sendfile('index.html');
+});
+
 // start app
 var server = app.listen(8080, function() {
   var host = server.address().address
