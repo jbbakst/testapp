@@ -1,5 +1,9 @@
-var databaseURL = 'todosdb';
+var databaseURL = 'todos';
 var collections = ["Todo"];
-var db = require('mongojs').connect(databaseURL, collections);
+var mongojs = require('mongojs');
+var db = mongojs.connect(databaseURL, collections);
 
-module.exports = db;
+module.exports = {
+  db: db,
+  mongojs: mongojs 
+}

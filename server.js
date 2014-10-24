@@ -2,12 +2,9 @@
 var express = require('express');
 var app = express();
 
-// var db = require('./db.js');
-var databaseURL = 'todos';
-var collections = ["Todo"];
-var mongojs = require('mongojs');
-var db = mongojs.connect(databaseURL, collections);
-// var ObjectID = mongojs.ObjectID;
+var dbConfig = require('./db');
+var db = dbConfig.db;
+var mongojs = dbConfig.mongojs;
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
