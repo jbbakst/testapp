@@ -51,7 +51,6 @@ app.delete('/api/todos/:todo_id', function(req, res) {
         _id : mongojs.ObjectId(req.params.todo_id)
     }, function(err, todo) {
         if (err) res.send(err);
-        console.log("SUCCESS DELETING");
         db.Todo.find(function(err, todos) {
             if (err) res.send(err);
             res.json(todos);

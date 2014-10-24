@@ -1,9 +1,7 @@
 var todoApp = angular.module('todoApp', []);
-console.log("module created: " + todoApp);
 
 todoApp.controller("TodoController", function($scope, $http) {
     $scope.formData = {};
-    console.log("form data: " + $scope.formData);
 
     $http.get('/api/todos')
         .success(function(data) {
@@ -29,13 +27,11 @@ todoApp.controller("TodoController", function($scope, $http) {
     $scope.deleteTodo = function(id) {
         console.log("TRYING TO DELETE");
         $http.delete('/api/todos/' + id)
-            .success(function(data) {
-                console.log("SUCCESS");
+            .success(function(data) {                
                 $scope.todos = data;
                 console.log(data);
             })
             .error(function(data) {
-                console.log("ERROR");
                 console.log('Error: ' + data);
             });
     };
