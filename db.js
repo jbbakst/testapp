@@ -1,4 +1,4 @@
-var databaseURL = 'localhost:27017';
+var databaseURL = 'todosdb';
 var collections = ["Todo"];
 var db = require('mongojs').connect(databaseURL, collections);
 

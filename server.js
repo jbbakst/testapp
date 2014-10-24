@@ -2,10 +2,14 @@
 var express = require('express');
 var app = express();
 
-var db = require('./db');
+// var db = require('./db.js');
+var databaseURL = 'todos';
+var collections = ["Todo"];
+var mongojs = require('mongojs');
+var db = mongojs.connect(databaseURL, collections);
+// var ObjectID = mongojs.ObjectID;
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
 
 // configuration
 
@@ -42,11 +46,12 @@ app.post('/api/todos', function(req, res) {
 
 // delete a todo
 app.delete('/api/todos/:todo_id', function(req, res) {
+  console.log("DELETE ID: " + req.params.todo_id);
     db.Todo.remove({
-        _id : req.params.todo_id
+        _id : mongojs.ObjectId(req.params.todo_id)
     }, function(err, todo) {
         if (err) res.send(err);
-
+        console.log("SUCCESS DELETING");
         db.Todo.find(function(err, todos) {
             if (err) res.send(err);
             res.json(todos);
@@ -55,11 +60,11 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-    res.sendfile('index.html');
+    res.render('index.html');
 });
 
 // start app
-var server = app.listen(8080, function() {
+var server = app.listen(3000, function() {
   var host = server.address().address
   var port = server.address().port
   console.log("Express server listening on http://%s:%s", host, port)
