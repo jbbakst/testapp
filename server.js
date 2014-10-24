@@ -55,7 +55,7 @@ app.delete('/api/todos/:todo_id', function(req, res) {
     });
 });
 
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
     res.render('index.html');
 });
 
